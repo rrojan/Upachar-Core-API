@@ -30,7 +30,7 @@ SMOKER_STATUS = (
 USER_TYPES = (('patient', 'Patient'), ('doctor', 'Doctor'), ('hospital', 'Hospital'))
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.PROTECT)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=32, null=True, blank=True)
     phone_no = models.CharField(max_length=10, null=True, blank=True)
 

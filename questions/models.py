@@ -47,7 +47,7 @@ class Option(models.Model):
 
 
 class Submission(models.Model):
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     data = models.JSONField()
     date_added = models.DateTimeField(auto_now_add=True)
 
