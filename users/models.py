@@ -55,7 +55,7 @@ class Profile(models.Model):
 
     user_type = models.CharField(max_length=8, choices=USER_TYPES, default='patient')
 
-    assigned_patients = models.JSONField(null=True, blank=True)
+    assigned_to = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='assigned')
 
     def __str__(self) -> str:
         return f'{self.name} [{self.user.username}]'

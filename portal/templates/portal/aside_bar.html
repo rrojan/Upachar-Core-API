@@ -55,18 +55,18 @@
                 </a>
             </li>
             <li class="relative px-6 py-3">
-                {% if page == '' %}
+                {% if page == 'all_patients' %}
                 <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 {% endif %}
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                    href="#">
+                    href="{% url 'portal:all_patients' %}">
                     <i class="fas fa-procedures"></i>
                     <span class="ml-4">All Patients</span>
                 </a>
             </li>
             <li class="relative px-6 py-3">
-                {% if page == '' %}
+                {% if page == 'all_doctors' %}
                 <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 {% endif %}
@@ -188,7 +188,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-3">
-                {% if page == '' %}
+                {% if page == 'archive' %}
                 <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 {% endif %}
@@ -204,12 +204,12 @@
                 </a>
             </li>
             <li class="relative px-6 py-3">
-                {% if page == '' %}
+                {% if page == 'all_patients' %}
                 <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 {% endif %}
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                    href="#">
+                    href="{% url 'portal:all_patients' %}">
                     <i class="fas fa-procedures"></i>
                     <span class="ml-4">All Patients</span>
                 </a>

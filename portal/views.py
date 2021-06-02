@@ -7,6 +7,8 @@ from users.models import Profile
 from questions.models import Submission
 
 
+# TODO: refactor to clean up repeated code
+
 @login_required
 def index_view(request):
     # reduce number of db reads:
@@ -86,8 +88,6 @@ def reports_today_view(request):
 def reports_archive_view(request):
 
     profiles = Profile.objects.filter(hospital_name=request.user.username)
-    print(profiles)
-    print(profiles.filter(user_type='doctor'))
     submissions = Submission.objects.filter(
         user__profile__hospital_name=request.user.username)
 
@@ -120,3 +120,42 @@ def reports_archive_view(request):
         'current_page': current_page
     }
     return render(request, 'portal/reports_archive.html', context)
+
+
+
+@login_required
+def all_patients_view(request):
+
+    profiles = Profile.objects.filter(hospital_name=request.user.username).order_by('name')
+    patients = profiles.filter(user_type='patient')
+    submissions = Submission.objects.filter(
+        user__profile__hospital_name=request.user.username)
+
+    counts = {
+        'total': profiles.count() - 1,
+        'patients': patients.count(),
+        'status_updates': submissions.count(),
+    }
+
+    SUB_DISPLAY = 25
+    sub_start = int(request.GET.get('start')) if 'start' in request.GET else 0
+    sub_end = int(request.GET.get('end')
+                  ) if 'end' in request.GET else SUB_DISPLAY
+    sub_total = profiles.count()
+    sub_pages = math.ceil(sub_total / SUB_DISPLAY)
+    current_page = math.ceil(sub_end / SUB_DISPLAY)
+
+    submissions = submissions.order_by('-date_added')[sub_start:sub_end]
+
+    context = {
+        'page': 'all_patients',
+        'counts': counts,
+        'patients': patients,
+        'sub_start': sub_start + 1,
+        'sub_end': sub_end if sub_end < sub_total else sub_total,
+        'sub_pages': sub_pages,
+        'sub_total': sub_total,
+        'sub_range': range(1, sub_pages + 1),
+        'current_page': current_page
+    }
+    return render(request, 'portal/patients_all.html', context)
