@@ -140,3 +140,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
+
+
+LOGIN_URL = '/portal/login/'
+LOGIN_REDIRECT_URL = '/portal/'

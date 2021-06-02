@@ -1,29 +1,35 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from datetime import date
 import math
 from users.models import Profile
 from questions.models import Submission
 
 
+@login_required
 def index_view(request):
+    # reduce number of db reads:
+    profiles = Profile.objects.filter(hospital_name=request.user.username)
+    submissions = Submission.objects.filter(
+        user__profile__hospital_name=request.user.username)
 
     counts = {
-        'patients': Profile.objects.filter(user_type='patient').count(),
-        'status_updates': Submission.objects.filter(date_added__startswith=date.today()).count(),
-        'doctors': Profile.objects.filter(user_type='doctor').count(),
-        'severe': len([elem for elem in Submission.objects.filter(date_added__startswith=date.today()) if elem.data['How is your condition (Mild/ Moderate/ Severe) in your understanding'].lower() == 'severe'])
+        'patients': profiles.filter(user_type='patient').count(),
+        'status_updates': submissions.filter(date_added__startswith=date.today()).count(),
+        'doctors': profiles.filter(user_type='doctor').count(),
+        'severe': len([elem for elem in submissions.filter(date_added__startswith=date.today()) if elem.data['How is your condition (Mild/ Moderate/ Severe) in your understanding'].lower() == 'severe'])
     }
 
     SUB_DISPLAY = 10
     sub_start = int(request.GET.get('start')) if 'start' in request.GET else 0
     sub_end = int(request.GET.get('end')
                   ) if 'end' in request.GET else SUB_DISPLAY
-    sub_total = Submission.objects.all().count()
+    sub_total = submissions.count()
     sub_pages = math.ceil(sub_total / SUB_DISPLAY)
     current_page = math.ceil(sub_end / SUB_DISPLAY)
 
-    submissions = Submission.objects.order_by('-date_added')[sub_start:sub_end]
+    submissions = submissions.order_by('-date_added')[sub_start:sub_end]
 
     context = {
         'page': 'dashboard',
@@ -39,23 +45,28 @@ def index_view(request):
     return render(request, 'portal/index.html', context)
 
 
+@login_required
 def reports_today_view(request):
 
+    profiles = Profile.objects.filter(hospital_name=request.user.username)
+    submissions = Submission.objects.filter(
+        user__profile__hospital_name=request.user.username)
+
     counts = {
-        'new_patients': User.objects.filter(date_joined__startswith=date.today()).count(),
-        'status_updates': Submission.objects.filter(date_added__startswith=date.today()).count(),
-        'severe': len([elem for elem in Submission.objects.filter(date_added__startswith=date.today()) if elem.data['How is your condition (Mild/ Moderate/ Severe) in your understanding'].lower() == 'severe'])
+        'new_patients': profiles.filter(user__date_joined__startswith=date.today()).count(),
+        'status_updates': submissions.filter(date_added__startswith=date.today()).count(),
+        'severe': len([elem for elem in submissions.filter(date_added__startswith=date.today()) if elem.data['How is your condition (Mild/ Moderate/ Severe) in your understanding'].lower() == 'severe'])
     }
 
     SUB_DISPLAY = 25
     sub_start = int(request.GET.get('start')) if 'start' in request.GET else 0
     sub_end = int(request.GET.get('end')
                   ) if 'end' in request.GET else SUB_DISPLAY
-    sub_total = Submission.objects.all().count()
+    sub_total = submissions.all().count()
     sub_pages = math.ceil(sub_total / SUB_DISPLAY)
     current_page = math.ceil(sub_end / SUB_DISPLAY)
 
-    submissions = Submission.objects.order_by('-date_added')[sub_start:sub_end]
+    submissions = submissions.order_by('-date_added')[sub_start:sub_end]
 
     context = {
         'page': 'today',
@@ -71,24 +82,31 @@ def reports_today_view(request):
     return render(request, 'portal/reports_today.html', context)
 
 
+@login_required
 def reports_archive_view(request):
 
+    profiles = Profile.objects.filter(hospital_name=request.user.username)
+    print(profiles)
+    print(profiles.filter(user_type='doctor'))
+    submissions = Submission.objects.filter(
+        user__profile__hospital_name=request.user.username)
+
     counts = {
-        'total': User.objects.all().count(),
-        'patients': Profile.objects.filter(user_type='patient').count(),
-        'status_updates': Submission.objects.all().count(),
-        'doctors': Profile.objects.filter(user_type='doctor').count(),
+        'total': profiles.count(),
+        'patients': profiles.filter(user_type='patient').count(),
+        'status_updates': submissions.all().count(),
+        'doctors': profiles.filter(user_type='doctor').count(),
     }
 
     SUB_DISPLAY = 50
     sub_start = int(request.GET.get('start')) if 'start' in request.GET else 0
     sub_end = int(request.GET.get('end')
                   ) if 'end' in request.GET else SUB_DISPLAY
-    sub_total = Submission.objects.all().count()
+    sub_total = submissions.all().count()
     sub_pages = math.ceil(sub_total / SUB_DISPLAY)
     current_page = math.ceil(sub_end / SUB_DISPLAY)
 
-    submissions = Submission.objects.order_by('-date_added')[sub_start:sub_end]
+    submissions = submissions.order_by('-date_added')[sub_start:sub_end]
 
     context = {
         'page': 'archive',
