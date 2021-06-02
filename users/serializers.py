@@ -30,6 +30,13 @@ class ProfileSerializer(serializers.ModelSerializer):
             'smoking_status',
         )
 
+class HospitalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = (
+            'name',
+        )
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer(required=True)

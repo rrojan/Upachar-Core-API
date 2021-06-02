@@ -3,8 +3,14 @@
 ## API Docs:
 
 admin login: admin, testing321
+hospital login: Testpataal, testing321
 
-### URL Routes and Endpoints
+Login as hospital by going to `/portal`.
+
+Admin can register hospital. Hospital can register Doctor. Doctor can get assigned to (multiple) patients.
+
+
+### URL Routes and Endpoints for mobile clietn
 
 - /api/register/ -> Register for an account. Use patient id as username.
     - Data in format
