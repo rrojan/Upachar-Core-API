@@ -27,7 +27,7 @@ SMOKER_STATUS = (
     ('never', 'Never had smoking habit')
 )
 
-USER_TYPES = (('patient', 'Patient'), ('doctor', 'Doctor'))
+USER_TYPES = (('patient', 'Patient'), ('doctor', 'Doctor'), ('hospital', 'Hospital'))
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
@@ -53,7 +53,9 @@ class Profile(models.Model):
     comorbidity_problems = models.JSONField(null=True, blank=True)
     smoking_status = models.CharField(max_length=10, choices=SMOKER_STATUS, null=True, blank=True)
 
-    user_type = models.CharField(max_length=7, choices=USER_TYPES, default='patient')
+    user_type = models.CharField(max_length=8, choices=USER_TYPES, default='patient')
+
+    assigned_patients = models.JSONField(null=True, blank=True)
 
     def __str__(self) -> str:
         return f'{self.name} [{self.user.username}]'
