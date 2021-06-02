@@ -49,4 +49,37 @@ admin login: admin, testing321
 
 
 - /api/submit/ -> submit a response
-    - Data in format: {"user": {patient_pk (from get-token)}, "data": {JSON}}
+    - Data in format: `{"user": {patient_pk (from get-token)}, "data": {JSON}}`. Example:
+        ```
+        {
+            "user": 8,
+            "data": {
+                "1": [
+                    1,
+                    2,
+                    3
+                ],
+                "2": "2",
+                "3": [
+                    "cetamol",
+                    "brufin"
+                ],
+                "4": [
+                    1,
+                    2
+                ],
+                "5": "2",
+                "6": "2",
+                "7": "1",
+                "8": [
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "9": "2",
+                "10": "1"
+            }
+        }
+        ```
+
