@@ -4,14 +4,14 @@
 {% load custom_tags %}
 
 {% block title %}
-Reports Today
+Archived Reports
 {% endblock %}
 
 {% block content %}
 <main class="h-full overflow-y-auto">
     <div class="container px-6 mx-auto grid">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            Reports Today
+            Archived Reports
         </h2>
 
         <!-- Cards -->
@@ -20,14 +20,28 @@ Reports Today
             <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                 <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500"
                     style="border-radius: 50%!important; width: 60px; height: 60px; text-align: center;">
-                    <i class="fas fa-user-plus fa-2x"></i>
+                    <i class="fas fa-procedures fa-2x"></i>
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        New UPACHAR Signups
+                        Total patients in hospital
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {{ counts.new_patients }}
+                        {{ counts.patients }}
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500"
+                    style="border-radius: 50%!important; width: 60px; height: 60px; text-align: center;">
+                    <i class="fas fa-users fa-2x"></i>
+                </div>
+                <div>
+                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                        Total UPACHAR Users
+                    </p>
+                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                        {{ counts.total }}
                     </p>
                 </div>
             </div>
@@ -39,7 +53,7 @@ Reports Today
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Status updates today
+                        Total Status Updates
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                         {{ counts.status_updates }}
@@ -48,16 +62,16 @@ Reports Today
             </div>
             <!-- Card -->
             <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500"
+                <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500"
                     style="border-radius: 50%!important; width: 60px; height: 60px; text-align: center;">
-                    <i class="fas fa-exclamation fa-2x"></i>
+                    <i class="fas fa-stethoscope fa-2x"></i>
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Severe cases
+                        Total Doctors
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {{ counts.severe }}
+                        {{ counts.doctors }}
                     </p>
                 </div>
             </div>
@@ -86,7 +100,6 @@ Reports Today
                                     <span class="font-semibold">
                                         {{ submission.user.profile.name }}
                                     </span>
-
                                 </span>
                             </td>
                             <td class="px-4 py-3 text-sm">
