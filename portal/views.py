@@ -159,3 +159,40 @@ def all_patients_view(request):
         'current_page': current_page
     }
     return render(request, 'portal/patients_all.html', context)
+
+
+
+@login_required
+def all_doctors_view(request):
+
+    profiles = Profile.objects.filter(hospital_name=request.user.username).order_by('name')
+    patients = profiles.filter(user_type='patient')
+    doctors = profiles.filter(user_type='doctor')
+
+    counts = {
+        'total': profiles.count() - 1,
+        'patients': patients.count(),
+        'doctors': doctors.count(),
+    }
+
+    SUB_DISPLAY = 10
+    sub_start = int(request.GET.get('start')) if 'start' in request.GET else 0
+    sub_end = int(request.GET.get('end')
+                  ) if 'end' in request.GET else SUB_DISPLAY
+    sub_total = profiles.count()
+    sub_pages = math.ceil(sub_total / SUB_DISPLAY)
+    current_page = math.ceil(sub_end / SUB_DISPLAY)
+
+    context = {
+        'page': 'all_doctors',
+        'counts': counts,
+        'doctors': doctors,
+
+        'sub_start': sub_start + 1,
+        'sub_end': sub_end if sub_end < sub_total else sub_total,
+        'sub_pages': sub_pages,
+        'sub_total': sub_total,
+        'sub_range': range(1, sub_pages + 1),
+        'current_page': current_page
+    }
+    return render(request, 'portal/doctors_all.html', context)

@@ -86,6 +86,7 @@ Dashboard
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             <th class="px-4 py-3">Patient</th>
+                            <th class="px-4 py-3">Assigned To</th>
                             <th class="px-4 py-3">Patient Since</th>
                             <th class="px-4 py-3">&nbsp;&nbsp;&nbsp;Status</th>
                             <th class="px-4 py-3">Report Date</th>
@@ -103,6 +104,9 @@ Dashboard
                                     </span>
 
                                 </span>
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                {{ submission.user.profile.assigned_to.profile.name }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ submission.user.date_joined|timesince }}

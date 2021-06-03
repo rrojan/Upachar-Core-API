@@ -21,6 +21,7 @@ class CustomAuthToken(ObtainAuthToken):
         return Response({
             'token': token.key,
             'patient_pk': user.pk,
+            'user_type': user.profile.user_type
         })
 
 

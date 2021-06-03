@@ -11,7 +11,7 @@ Archived Reports
 <main class="h-full overflow-y-auto">
     <div class="container px-6 mx-auto grid">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            All Patients
+            All Doctors
         </h2>
 
         <!-- Cards -->
@@ -31,32 +31,19 @@ Archived Reports
                     </p>
                 </div>
             </div>
-            <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500"
-                    style="border-radius: 50%!important; width: 60px; height: 60px; text-align: center;">
-                    <i class="fas fa-users fa-2x"></i>
-                </div>
-                <div>
-                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Total UPACHAR Users
-                    </p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {{ counts.total }}
-                    </p>
-                </div>
-            </div>
+
             <!-- Card -->
             <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500"
+                <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500"
                     style="border-radius: 50%!important; width: 60px; height: 60px; text-align: center;">
-                    <i class="fas fa-mobile-alt fa-2x"></i>
+                    <i class="fas fa-stethoscope fa-2x"></i>
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Total Status Updates
+                        Total Doctors
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {{ counts.status_updates }}
+                        {{ counts.doctors }}
                     </p>
                 </div>
             </div>
@@ -69,29 +56,25 @@ Archived Reports
                     <thead>
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            <th class="px-4 py-3">Patient Name</th>
-                            <th class="px-4 py-3">Assigned To</th>
-                            <th class="px-4 py-3">Patient Since</th>
+                            <th class="px-4 py-3">Doctor Name</th>
+                            <th class="px-4 py-3">Assigned Patients</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                        {% for patient in patients %}
+                        {% for doctor in doctors %}
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
                                 <span>
                                     <i class="fas fa-procedures"></i>
                                     &nbsp;
                                     <span class="font-semibold">
-                                        {{ patient.name }}
+                                        {{ doctor.name }}
                                     </span>
                                 </span>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ patient.assigned_to.profile.name }}
-                            </td>   
-                            <td class="px-4 py-3 text-sm">
-                                {{ patient.user.date_joined|timesince }}
-                            </td>                            
+                                {{ doctor }}
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
