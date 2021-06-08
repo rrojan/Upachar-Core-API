@@ -10,19 +10,34 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
+
 class CustomAuthToken(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,
-                                           context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({
-            'token': token.key,
-            'patient_pk': user.pk,
-            'user_type': user.profile.user_type
-        })
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({
+                'token': token.key,
+                'patient_pk': user.pk,
+                'user_type': user.profile.user_type
+            })
+        else:
+            return Response(serializer.errors)
+
+# class CustomAuthToken(ObtainAuthToken):
+
+#     def post(self, request, *args, **kwargs):
+#         serializer = self.serializer_class(data=request.data, context={'request': request})
+#         serializer.is_valid(raise_exception=True)
+#         user = serializer.validated_data['user']
+#         token, created = Token.objects.get_or_create(user=user)
+#         return Response({
+#             'token': token.key,
+#             'patient_pk': user.pk,
+#             'user_type': user.profile.user_type
+#         })
 
 
 class QuestionList(ViewSet):
@@ -36,11 +51,13 @@ class QuestionList(ViewSet):
 
 class SubmissionViewSet(ViewSet):
     permission_classes = [IsAuthenticated]
+
     def create(self, request):
         serializer = SubmissionSerializer(data=request.data)
         if serializer.is_valid():
             try:
-                Submission.objects.get(date_added__startswith=date.today(), user=request.user)
+                Submission.objects.get(
+                    date_added__startswith=date.today(), user=request.user)
                 return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
             except Exception as e:
                 print(e)
