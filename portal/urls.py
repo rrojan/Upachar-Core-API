@@ -12,6 +12,7 @@ urlpatterns = [
     path('all_patients/', all_patients_view, name='all_patients'),
     path('all_patients/<int:pk>', patient_detail_view, name='patient_detail'),
     path('all_doctors/', all_doctors_view, name='all_doctors'),
+    path('all_doctors/<int:pk>', doctor_detail_view, name='doctor_detail'),
     path('reports/<int:pk>/', report_detail_view, name='report_detail'),
 
     path('login/', LoginView.as_view(template_name="portal/login.html"), name='login'),

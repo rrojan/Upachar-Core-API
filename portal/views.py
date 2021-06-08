@@ -211,3 +211,10 @@ def patient_detail_view(request, pk):
         'profile': Profile.objects.get(pk=pk),
     }
     return render(request, 'portal/patient_detail.html', context)
+
+def doctor_detail_view(request, pk):
+    context = {
+        'page': 'all_doctors',
+        'profile': Profile.objects.get(pk=pk),
+    }
+    return render(request, 'portal/doctor_detail.html', context)

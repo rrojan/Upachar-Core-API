@@ -62,7 +62,10 @@ class Profile(models.Model):
     
     def get_assigned_count(self):
         return self.user.assigned.count()
-        
+    
+    def get_assigned_all(self):
+        assigned = self.user.assigned.all()
+        return [patient.name for patient in assigned]
 
 
 @receiver(post_save, sender=User)

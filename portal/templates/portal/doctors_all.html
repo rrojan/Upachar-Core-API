@@ -33,11 +33,11 @@ Archived Reports
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
                                 <span>
-                                    <i class="fas fa-procedures"></i>
-                                    &nbsp;
-                                    <span class="font-semibold">
-                                        {{ doctor.name }}
-                                    </span>
+                                    <a href="{% url 'portal:doctor_detail' pk=doctor.pk%}">
+                                        <span class="font-semibold">
+                                            {{ doctor.name }}
+                                        </span>
+                                    </a>
                                 </span>
                             </td>
                             <td class="px-4 py-3 text-sm">
