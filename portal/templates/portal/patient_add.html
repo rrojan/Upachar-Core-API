@@ -1,0 +1,52 @@
+{% extends 'portal/base.html' %}
+
+{% load tailwind_filters %}
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}
+Patient Details
+{% endblock %}
+
+{% block css %}
+<style>
+    .upach-btn {
+        border: 1px solid lightgreen;
+        padding: 10px;
+        border-radius: 32px;
+    }
+
+    .upach-btn:hover {
+        background-color: lightgreen;
+        transition: 0.420s;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="h-full overflow-y-auto">
+    <div class="container px-6 mx-auto grid">
+        <h2 class="mt-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+            Add patient:
+        </h2>
+        <div class="my-8 w-full overflow-hidden">
+            <div class="text-gray-700 dark:text-gray-300">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+                    <p class="font-bold">Success!</p>
+                    <p>{{ message }}</p>
+                  </div>
+                {% endfor %}
+                {% endif %}
+                <form action="" method="POST">{% csrf_token %}
+                    {{ user_form|crispy }}
+                    <!-- {{ profile_form|crispy }} -->
+                    <button class="my-6 upach-btn">Create New</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

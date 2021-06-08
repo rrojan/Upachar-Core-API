@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     # 3rd party
     'rest_framework',
     'rest_framework.authtoken',
+    'crispy_forms',
+    'crispy_tailwind',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +146,7 @@ REST_FRAMEWORK = {
 
 LOGIN_URL = '/portal/login/'
 LOGIN_REDIRECT_URL = '/portal/'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"
