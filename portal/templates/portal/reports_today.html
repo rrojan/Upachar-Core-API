@@ -10,9 +10,12 @@ Reports Today
 {% block content %}
 <main class="h-full overflow-y-auto">
     <div class="container px-6 mx-auto grid">
-        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+        <h2 class="mt-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Reports Today
         </h2>
+        <h3 class="my-6 text-sm font-semibold text-gray-700 dark:text-gray-200">
+            Click on patient name to view full report details
+        </h3>
 
         <!-- Cards -->
         <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
@@ -84,7 +87,9 @@ Reports Today
                                     <i class="fas fa-procedures"></i>
                                     &nbsp;
                                     <span class="font-semibold">
-                                        {{ submission.user.profile.name }}
+                                        <a href="{% url 'portal:report_detail' pk=submission.pk %}">
+                                            {{ submission.user.profile.name }}
+                                        </a>
                                     </span>
 
                                 </span>

@@ -59,6 +59,10 @@ class Profile(models.Model):
 
     def __str__(self) -> str:
         return f'{self.name} [{self.user.username}]'
+    
+    def get_assigned_count(self):
+        return self.user.assigned.count()
+        
 
 
 @receiver(post_save, sender=User)

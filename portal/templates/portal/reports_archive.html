@@ -10,9 +10,12 @@ Archived Reports
 {% block content %}
 <main class="h-full overflow-y-auto">
     <div class="container px-6 mx-auto grid">
-        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+        <h2 class="mt-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Archived Reports
         </h2>
+        <h3 class="my-6 text-sm font-semibold text-gray-700 dark:text-gray-200">
+            Click on patient name to view full report details
+        </h3>
 
         <!-- Cards -->
         <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
@@ -92,46 +95,49 @@ Archived Reports
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                         {% for submission in submissions %}
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <span>
-                                    <i class="fas fa-procedures"></i>
-                                    &nbsp;
-                                    <span class="font-semibold">
-                                        {{ submission.user.profile.name }}
+                        
+                            <tr class="text-gray-700 dark:text-gray-400">
+                                <td class="px-4 py-3">
+                                    <span>
+                                        <i class="fas fa-procedures"></i>
+                                        &nbsp;
+                                        <span class="font-semibold">
+                                            <a href="{% url 'portal:report_detail' pk=submission.pk %}">
+                                            {{ submission.user.profile.name }}
+                                        </a>
+                                        </span>
                                     </span>
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ submission.user.date_joined|timesince }}
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                {% with c="How is your condition (Mild/ Moderate/ Severe) in your understanding" %}
-                                {% if submission.data|get:c|lower == "mild" %}
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                                    style="display: inline-block; width: 70px; text-align: center;">
-                                    Mild
-                                </span>
-                                {% elif submission.data|get:c|lower == "moderate" %}
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
-                                    style="display: inline-block; width: 70px; text-align: center;">
-                                    Moderate
-                                </span>
-                                {% elif submission.data|get:c|lower == "severe" %}
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
-                                    style="display: inline-block; width: 70px; text-align: center;">
-                                    Severe
-                                </span>
-                                {% endif %}
-                                {% endwith %}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ submission.date_added }}
-                            </td>
-                        </tr>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{ submission.user.date_joined|timesince }}
+                                </td>
+                                <td class="px-4 py-3 text-xs">
+                                    {% with c="How is your condition (Mild/ Moderate/ Severe) in your understanding" %}
+                                    {% if submission.data|get:c|lower == "mild" %}
+                                    <span
+                                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                                        style="display: inline-block; width: 70px; text-align: center;">
+                                        Mild
+                                    </span>
+                                    {% elif submission.data|get:c|lower == "moderate" %}
+                                    <span
+                                        class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
+                                        style="display: inline-block; width: 70px; text-align: center;">
+                                        Moderate
+                                    </span>
+                                    {% elif submission.data|get:c|lower == "severe" %}
+                                    <span
+                                        class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
+                                        style="display: inline-block; width: 70px; text-align: center;">
+                                        Severe
+                                    </span>
+                                    {% endif %}
+                                    {% endwith %}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{ submission.date_added }}
+                                </td>
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>

@@ -196,3 +196,11 @@ def all_doctors_view(request):
         'current_page': current_page
     }
     return render(request, 'portal/doctors_all.html', context)
+
+
+def report_detail_view(request, pk):
+    context = {
+        'page': 'archive',
+        'report': Submission.objects.get(pk=pk),
+    }
+    return render(request, 'portal/report_detail.html', context)
