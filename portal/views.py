@@ -204,3 +204,10 @@ def report_detail_view(request, pk):
         'report': Submission.objects.get(pk=pk),
     }
     return render(request, 'portal/report_detail.html', context)
+
+def patient_detail_view(request, pk):
+    context = {
+        'page': 'all_patients',
+        'profile': Profile.objects.get(pk=pk),
+    }
+    return render(request, 'portal/patient_detail.html', context)

@@ -10,6 +10,7 @@ urlpatterns = [
     path('today/', reports_today_view, name='reports_today'),
     path('archive/', reports_archive_view, name='archive'),
     path('all_patients/', all_patients_view, name='all_patients'),
+    path('all_patients/<int:pk>', patient_detail_view, name='patient_detail'),
     path('all_doctors/', all_doctors_view, name='all_doctors'),
     path('reports/<int:pk>/', report_detail_view, name='report_detail'),
 

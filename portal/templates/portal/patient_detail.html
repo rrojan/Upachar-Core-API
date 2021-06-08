@@ -1,0 +1,214 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}
+Patient Details
+{% endblock %}
+
+{% block content %}
+<main class="h-full overflow-y-auto">
+    <div class="container px-6 mx-auto grid">
+        <h2 class="mt-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+            Patient details
+        </h2>
+        <div class="my-8 w-full overflow-hidden">
+            <div class="text-gray-700 dark:text-gray-300">
+                <!-- With actions -->
+                <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+                    Patient name: <u>{{ profile.name }}</u>
+                </h4>
+                <h5 class="mb-4 text-sm font-semibold text-gray-600 dark:text-gray-300">
+                    Date: {{ profile.user.date_joined }}
+                    </h4>
+                    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                        <div class="w-full overflow-x-auto">
+                            <table class="w-full whitespace-no-wrap">
+                                <thead>
+                                    <tr
+                                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                        <th class="px-4 py-3">Field</th>
+                                        <th class="px-4 py-3">Info</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Name
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.name }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                ID
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.user }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Phone number
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.phone_no }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Ward Name
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.hospital_ward_name }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Address
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.address }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Province
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.province }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Occupation
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.occupation }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Sex
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.sex }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Age
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.age }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Day of PCR positive
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.day_of_pcr_positive }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                PCR CT Value
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.PCR_CT_value }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Vaccination status
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.vaccination_status }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Prevalent Conditions
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.prevalent_conditions|jsonify|get:'data' }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Stage of patient at admission
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.stage_of_patient }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Comorbidity problems
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.comorbidity_problems|jsonify|get:'data' }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Smoking status
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.smoking_status }}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center text-sm">
+                                                Assigned to
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ profile.assigned_to.profile.name }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

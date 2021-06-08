@@ -34,19 +34,21 @@ Archived Reports
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
                                 <span>
-                                    <i class="fas fa-procedures"></i>
-                                    &nbsp;
-                                    <span class="font-semibold">
-                                        {{ patient.name }}
-                                    </span>
+                                    <a href="{% url 'portal:patient_detail' pk=patient.pk %}">
+                                        <i class="fas fa-procedures"></i>
+                                        &nbsp;
+                                        <span class="font-semibold">
+                                            {{ patient.name }}
+                                        </span>
+                                    </a>
                                 </span>
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ patient.assigned_to.profile.name }}
-                            </td>   
+                            </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ patient.user.date_joined|timesince }}
-                            </td>                            
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
